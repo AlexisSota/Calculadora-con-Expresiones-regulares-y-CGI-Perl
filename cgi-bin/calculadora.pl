@@ -1,16 +1,38 @@
+#!/usr/bin/perl
+
 use strict;
 use warnings;
 use CGI qw(:standard);
+use POSIX qw(floor);
 
-print header('text/html');
+print header();
+print start_html('Calculadora CGI-Perl');
 
-my $q = CGI->new;
-my $expresion = $q->param('expresion');
+my $expresion = param('expresion');
+my $resultado;
 
-my $resultado = eval $expresion;
+if ($expresion) {
+  
+    $resultado = evalExpression($expresion);
+}
 
-print $q->start_html('Resultado');
-print $q->h1('Resultado de la expresión');
-print $q->p("La expresión: $expresion");
-print $q->p("El resultado: $resultado");
-print $q->end_html;
+print "<h2>Resultado:</h2>";
+print "<p>$resultado</p>" if defined $resultado;
+
+print end_html();
+
+sub evalExpression {
+    my ($exp) = @_;
+
+    $exp =~ s/\^/**/g;
+
+    if ($exp =~ /^[\d+\-*/(). ]+$/) {
+        my $result = eval $exp;
+        if ($@) {
+            return "Error en la expresión: $@";
+        }
+        return $result;
+    } else {
+        return "Expresión no válida.";
+    }
+}
