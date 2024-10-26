@@ -1,0 +1,8 @@
+*.log
+.vs/
+*.user
+*.db
+*.cache
+*.DS_Store
+node_modules/
+docker-compose.override.yml
