@@ -1,8 +1,21 @@
+# Ignorar archivos de configuración del sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos de log
 *.log
-.vs/
-*.user
-*.db
-*.cache
-*.DS_Store
+
+# Ignorar archivos temporales
+*.tmp
+*.temp
+
+# Ignorar directorios de compilación
+/build
+/dist
+/tmp
+
+# Ignorar archivos de entorno
+.env
+
+# Ignorar directorios de dependencias de Node.js (si usas Node)
 node_modules/
-docker-compose.override.yml

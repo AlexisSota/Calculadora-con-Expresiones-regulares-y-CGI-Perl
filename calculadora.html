@@ -3,21 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora</title>
     <link rel="stylesheet" href="css/styles.css">
+    <title>Calculadora</title>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <div class="container">
-        <h1>Calculadora de Expresiones</h1>
-        <form id="calc-form">
-            <input type="text" id="expression" placeholder="Escribe tu expresión aquí" required>
-            <button type="submit">Calcular</button>
+        <h1>Calculadora CGI</h1>
+        <form action="cgi-bin/calculadora.pl" method="GET">
+            <input type="text" id="expresion" name="expresion" placeholder="Ingresa tu expresión" required>
+            <button type="submit" id="calcular">Calcular</button>
         </form>
-        <div class="resultado" id="result">
-            <h2>Resultado:</h2>
-            <p id="output"></p>
-        </div>
     </div>
-    <script src="js/scripts.js"></script>
 </body>
 </html>

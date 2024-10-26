@@ -1,10 +1,8 @@
-document.getElementById('calc-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const expression = document.getElementById('expression').value;
-    try {
-        const result = eval(expression);
-        document.getElementById('output').innerText = result;
-    } catch (error) {
-        document.getElementById('output').innerText = 'Error en la expresión';
-    }
+document.addEventListener('DOMContentLoaded', function () {
+    const calcularButton = document.getElementById('calcular');
+    
+    calcularButton.addEventListener('click', function () {
+        const input = document.getElementById('expresion').value;
+        alert('La expresión ingresada es: ' + input);
+    });
 });

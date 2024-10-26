@@ -1,26 +1,19 @@
-# Usar una imagen base de Debian
-FROM debian:bullseye
+FROM perl:5.34
 
-# Instalar Perl, Apache y el módulo CGI
 RUN apt-get update && \
-    apt-get install -y apache2 libapache2-mod-perl2 perl && \
-    a2enmod cgi && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y apache2 libapache2-mod-perl2 && \
+    a2enmod cgi
 
-# Establecer la carpeta de trabajo
-WORKDIR /var/www/html
+# Cambia esto para copiar los archivos HTML directamente
+COPY index.html /var/www/html/
+COPY calculadora.html /var/www/html/
+COPY ./cgi-bin /var/www/html/cgi-bin
+COPY ./css /var/www/html/css
+COPY ./js /var/www/html/js
 
-# Copiar los archivos del proyecto al contenedor
-COPY . .
+RUN chmod +x /var/www/html/cgi-bin/calculadora.pl
 
-# Establecer permisos para el archivo Perl
-RUN chmod +x cgi-bin/calculadora.pl
+COPY apache.conf /etc/apache2/sites-available/calculadora.conf
+RUN a2ensite calculadora.conf
 
-# Configurar Apache para que sirva contenido CGI
-RUN echo "AddHandler cgi-script .pl" >> /etc/apache2/apache2.conf
-
-# Exponer el puerto 80
-EXPOSE 80
-
-# Iniciar Apache en modo en primer plano
 CMD ["apachectl", "-D", "FOREGROUND"]
