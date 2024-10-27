@@ -3,17 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
-    <title>Calculadora</title>
-    <script src="script.js" defer></script>
+    <title>Calculadora en Perl</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Calculadora CGI</h1>
-        <form action="cgi-bin/calculadora.pl" method="GET">
-            <input type="text" id="expresion" name="expresion" placeholder="Ingresa tu expresión" required>
-            <button type="submit" id="calcular">Calcular</button>
-        </form>
+    <h2>Calculadora CGI en Perl</h2>
+    <form action="/cgi-bin/calculadora.pl" method="GET">
+        <label for="query">Ingresa tu expresión:</label>
+        <input type="text" id="query" name="query" required>
+        <button type="submit">Calcular</button>
+    </form>
+
+    <!-- Div donde se mostrará el resultado -->
+    <div id="resultado">
+        <!-- Aquí se mostrará el resultado devuelto por el script Perl -->
     </div>
+
+    <footer>
+        <p>Hecho por Alexis, © 2024</p>
+    </footer>
 </body>
 </html>

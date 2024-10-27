@@ -1,19 +1,19 @@
 FROM perl:5.34
 
+# Instala Apache y el módulo CGI
 RUN apt-get update && \
     apt-get install -y apache2 libapache2-mod-perl2 && \
     a2enmod cgi
 
-# Cambia esto para copiar los archivos HTML directamente
-COPY index.html /var/www/html/
-COPY calculadora.html /var/www/html/
-COPY ./cgi-bin /var/www/html/cgi-bin
-COPY ./css /var/www/html/css
-COPY ./js /var/www/html/js
+# Copia archivos necesarios
+COPY cgi-bin/calculadora.pl /usr/lib/cgi-bin/
+COPY css/style.css /var/www/html/css/
 
-RUN chmod +x /var/www/html/cgi-bin/calculadora.pl
+# Configura permisos y Apache
+RUN chmod +x /usr/lib/cgi-bin/calculadora.pl
 
-COPY apache.conf /etc/apache2/sites-available/calculadora.conf
-RUN a2ensite calculadora.conf
+# Expone el puerto 80
+EXPOSE 80
 
+# Ejecuta Apache
 CMD ["apachectl", "-D", "FOREGROUND"]
